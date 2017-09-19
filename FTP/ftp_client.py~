@@ -1,0 +1,22 @@
+import socket
+
+HOST = 'localhost'
+PORT = 8009
+INPUT_FILE = "/home/admin-it/hackrush/FTP/files/file.ogg"
+
+_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+_socket.connect((HOST, PORT))
+
+print ("Client is sending")
+
+f = open(INPUT_FILE, 'rb')
+send_file = f.read(1024)
+
+while send_file:
+    _socket.send(send_file)
+    send_file = f.read(1024)
+
+f.close()
+_socket.close()
+
+print ("Sending complete")
